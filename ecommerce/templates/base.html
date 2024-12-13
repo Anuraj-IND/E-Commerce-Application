@@ -7,7 +7,6 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>
     {% block title %}
-    
     {% endblock title %}
   </title>
   <meta name="description" content="e commerce website : we deliver product in least time">
@@ -41,8 +40,8 @@
 
       <a href="\" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="static/assets/img/pogo.png" alt="">
-        <h1 class="sitename">Shop Cart</h1>
+        <img src="{% static '/assets/img/pogo.png' %}" alt="">
+        <h1 class="sitename" style="color:orange">Shop Cart</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -73,12 +72,13 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
-      <img src="{% static '/assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
+      <img src="{% static '/assets/img/bg.jpg' %}" alt="" data-aos="fade-in">
 
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
         <div class="row justify-content-center">
           <div class="col-lg-8">
             {% block content %}
+            
             {% endblock content %}
           </div>
         </div>
