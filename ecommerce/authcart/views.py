@@ -6,10 +6,11 @@ from django.views import View
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
+from django.utils.encoding import force_bytes, force_str,DjangoUnicodeDecodeError
 from .utils import TokenGenerator , generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.auth import authenticate, login
 # Create your views here.
 def signup(request):
     if request.method == "POST":
@@ -29,7 +30,6 @@ def signup(request):
                 # return render(request, 'auth/signup.html')
         except Exception as identifier:
             pass
-        
         user = User.objects.create_user(email, email, password)
         user.is_active = False
         user.save()
@@ -37,7 +37,7 @@ def signup(request):
         message=render_to_string('authentication/activate.html', {
             'user': user,
             'domain': '127.0.0.1:8000',
-            'uid': urlsafe_base64_encode(force_bytes (user.pk)),
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': generate_token.make_token(user),
         })
         email_message = EmailMessage(
@@ -46,8 +46,8 @@ def signup(request):
             settings.EMAIL_HOST_USER,
             [email],)
         email_message.send()
-        messages.success(request, "User created, Please verify your email")
-        return redirect('/auth/login')
+        messages.success(request, "User created, Please verify your email !")
+        return redirect('/auth/signup')
     
     return render(request, 'signup.html')
 
@@ -61,13 +61,24 @@ class ActivateAccountViews(View):
         if user is not None and generate_token.check_token(user, token):
             user.is_active = True
             user.save()
-            messages.success(request, "Account activated successfully")
-            return redirect('/auth/login')
-        return render('authentication/activatefail.html')
+            messages.success(request, "Account activated successfully, now you can login!! ")
+            return redirect('/auth/signup')
+        return render(request,'authentication/activatefail.html')
 
 
 
 def handlelogin(request):
+    if request.method == "POST":
+        username = request.POST['email']
+        userpassword = request.POST['pass1']
+        myuser = authenticate(username=username, password=userpassword)
+        if myuser is not None:
+            login(request, myuser)
+            messages.success(request, "Login successful")
+            return render(request,'index.html')
+        else:
+            messages.warning(request, "Invalid password")
+            return render(request,'authentication/login.html')
     return render(request,'authentication/login.html')
 
 def handlelogout(request):
