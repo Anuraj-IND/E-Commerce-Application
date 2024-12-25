@@ -10,7 +10,7 @@ from django.utils.encoding import force_bytes, force_str,DjangoUnicodeDecodeErro
 from .utils import TokenGenerator , generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 def signup(request):
     if request.method == "POST":
@@ -68,19 +68,25 @@ class ActivateAccountViews(View):
 
 
 def handlelogin(request):
-    if request.method == "POST":
-        username = request.POST['email']
-        userpassword = request.POST['pass1']
-        myuser = authenticate(username=username, password=userpassword)
-        if myuser is not None:
-            login(request, myuser)
-            messages.success(request, "Login successful")
-            return render(request,'index.html')
-        else:
-            messages.warning(request, "Invalid password")
-            return render(request,'authentication/login.html')
+    try:
+        if request.method == "POST":
+            username = request.POST['email']
+            userpassword = request.POST['pass1']
+            myuser = authenticate(username=username, password=userpassword)
+            if myuser is not None:
+                login(request, myuser)
+                messages.success(request, "Login successful")
+                return redirect('/')
+            else:
+                messages.warning(request, "Invalid password")
+                return redirect('/auth/login')
+    except Exception as e:
+        messages.error(request, f"An error occurred: {e}")
+        return redirect('/auth/login')
     return render(request,'authentication/login.html')
 
 def handlelogout(request):
+    logout(request)
+    messages.info(request, "Logout successful")
     return redirect('/auth/login')
 #2hrs
