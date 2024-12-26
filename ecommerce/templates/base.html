@@ -54,10 +54,16 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="/about">About</a></li>
+          <li><a href="/about">My Profile</a></li>
           <li><a href="/blog">Blog</a></li>
-          <li><a href="/orders">My Orders</a></li>
-          <li><a href="/profile">My Profile</a></li>
+          <li><a href="/checkout">CheckOut</a></li>
+
+          <li><button type="button" id="popcart" data-toggle="popover" title="Cart"
+          data-placement="right" 
+          data-html="true" data-content="Cart isEmpty" class="btn bg-danger p-3 m-3">
+          Cart(<span id="cart">0</span>)</button>
+          </li>
+
           
           {% if  request.user.is_authenticated %}
           <li><a href="/auth/logout/">Logout {{user.username}}</a></li>
@@ -73,7 +79,6 @@
           
           
           <li><a href="/contact" class="bg-dark p-3 m-3">Contact</a></li>
-          <li><a href="/cart" class="bg-danger p-3 m-3">Cart</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -84,7 +89,7 @@
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+    <section id="hero" class="hero section  dark-background">
 
       <img src="{% static '/assets/img/bg.jpg' %}" alt="" data-aos="fade-in">
 
