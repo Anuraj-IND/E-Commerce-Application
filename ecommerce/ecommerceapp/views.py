@@ -33,8 +33,6 @@ def contact(request):
         messages.success(request, 'Your message has been sent!')
         return render(request, 'contact.html')
     return render(request, 'contact.html')
-def about(request):
-    return render(request, 'about.html')
 
 def checkout(request):
     if not request.user.is_authenticated:
@@ -113,24 +111,25 @@ def handlerequest(request):
     return render(request, 'paymentstatus.html', {'response': response_dict})
 
 
-def profile(request):
+def about(request):
     if not request.user.is_authenticated:
-        messages.warning(request,"Login & Try Again")
+        messages.warning(request, "Login & Try Again")
         return redirect('/auth/login')
-    currentuser=request.user.username
-    items=Orders.objects.filter(email=currentuser)
-    rid=""
+    currentuser = request.user.email.split('@')[0]
+    items = Orders.objects.filter(email=request.user.email)
     for i in items:
         print(i.oid)
-        # print(i.order_id)
-        myid=i.oid
-        rid=myid.replace("ShopyCart","")
+        myid = i.oid
+        rid = myid.replace("ShopyCart", "")
         print(rid)
-    status=OrderUpdate.objects.filter(order_id=int(rid))
-    for j in status:
-        print(j.update_desc)
+    try:
+        order_id = int(rid)
+        status = OrderUpdate.objects.filter(order_id=order_id)
+        for j in status:
+            print(j.update_desc)
+    except ValueError:
+        status = []
+        print("Invalid order ID:", rid)
 
-   
-    context ={"items":items,"status":status}
-    # print(currentuser)
-    return render(request,"profile.html",context)
+    context = {"items": items, "status": status,"currentuser": currentuser}
+    return render(request, "profile.html", context)
