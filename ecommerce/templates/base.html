@@ -50,29 +50,28 @@
       <a href="\" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="{% static '/assets/img/pogo.png' %}" alt="">
-        <h1 class="sitename" style="color:orange">Shop Cart</h1>
+        <h1 class="sitename" style="color:orange"><i class="fas fa-shopping-cart"></i>Shop Cart</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="/about">My Profile</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/checkout">CheckOut</a></li>
+            <li><a href="#hero" class="active"> <i class="fas fa-home"></i>&nbsp;Home</a></li>
+            <li><a href="/about"> <i class="fas fa-user"></i>&nbsp;My Profile</a></li>
+            <li><a href="/checkout"> <i class="fas fa-shopping-bag"></i>&nbsp;CheckOut</a></li>
 
           <li><button type="button" id="popcart" data-toggle="popover" title="Cart"
           data-placement="right" 
           data-html="true" data-content="Cart isEmpty" class="btn bg-danger p-3 m-3">
-          Cart(<span id="cart">0</span>)</button>
+          <i class="fas fa-shopping-cart"></i> Cart(<span id="cart">0</span>)</button>
           </li>
 
           
           {% if  request.user.is_authenticated %}
-          <li><a href="/auth/logout/">Logout {{user.username}}</a></li>
-          {% else %} 
-          <li class="dropdown"><a href="#"><span>Account  Menu</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <li><a href="/auth/logout/"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout {{user.username}}</a></li>
+            {% else %}
+          <li class="dropdown"><a href="#"><span></i><i class="fas fa-sign-in-alt"></i> Account  Menu</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="/auth/login/">Login in</a></li>
+                <li><a href="/auth/login/">Login</a></li>
               <li><a href="/auth/signup/">Sign up</a></li>
             </ul>
           </li>
@@ -80,7 +79,12 @@
           
           
           
-          <li><a href="/contact" class="bg-dark p-3 m-3">Contact</a></li>
+          <li>
+            <a href="/contact" class="bg-dark p-3 m-3" style="border-radius: 0.5em;">
+              <i class="fas fa-envelope"></i>&nbsp;Contact
+            </a>
+          </li>
+          
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -119,12 +123,12 @@
             <span class="sitename">Shop Cart</span>
           </a>
           <p class="mt-3">Delivering products in the least time possible.</p>
-            <div class="social-links d-flex justify-content-center mt-3">
-            <a href="https://x.com/Anuraj_xoxo" class="twitter"><i class="bi bi-twitter" style="color: #1DA1F2;"></i></a>
-            <a href="https://github.com/Anuraj-IND" class="github"><i class="bi bi-github" style="color: #333;"></i></a>
-            <a href="https://www.instagram.com/anuraj._.m/" class="instagram"><i class="bi bi-instagram" style="color: #E1306C;"></i></a>
-            <a href="https://www.linkedin.com/in/anuraj-maddheshiya" class="linkedin"><i class="bi bi-linkedin" style="color: #0077B5;"></i></a>
-            </div>
+          <div class="social-links d-flex justify-content-center mt-3">
+            <a href="https://x.com/Anuraj_xoxo"><i class="bi bi-twitter"></i></a>
+            <a href="https://github.com/Anuraj-IND"><i class="bi bi-github"></i></a>
+            <a href="https://www.instagram.com/anuraj._.m/"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/anuraj-maddheshiya"><i class="bi bi-linkedin"></i></a>
+          </div>
         </div>
       </div>
       <div class="row mt-4">

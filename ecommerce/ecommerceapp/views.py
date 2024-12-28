@@ -3,7 +3,14 @@ from django.shortcuts import render, redirect
 from ecommerceapp.models import Contact, Product, Orders, OrderUpdate
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from django.views import View
 from PayTm import Checksum
+from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import force_bytes,force_str, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from ecommerceapp import keys 
 
 # Define your MERCHANT_KEY here
 MERCHANT_KEY = 'your_merchant_key_here'
