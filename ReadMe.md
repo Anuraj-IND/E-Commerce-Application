@@ -24,44 +24,28 @@ This project is a comprehensive **E-Commerce Web Application** designed to provi
 - **Responsive Design**: Fully responsive and optimized for various devices, providing a smooth user experience on desktops, tablets, and smartphones.
 
 ## Technologies Used
-- **Backend**: Django, Express.js
+- **Backend**: Django
 - **Frontend**: HTML, CSS, Bootstrap, JavaScript
-- **Database**: MongoDB
 - **Email Service**: SMTP
 - **Payment Gateway**: Paytm
 
 ## Installation
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/ecommerce-web-app.git
-    cd ecommerce-web-app
+    git clone git@github.com:Anuraj-IND/E-Commerce-Application.git
     ```
 
 2. **Backend Setup**:
     - **Install dependencies**:
       ```bash
-      pip install -r requirements.txt
-      ```
-    - **Set up MongoDB**:
-      - Ensure MongoDB is running and accessible.
-    - **Run the server**:
-      ```bash
-      python manage.py runserver
+      pip install django
       ```
 
-3. **Frontend Setup**:
-    - **Navigate to the frontend directory**:
-      ```bash
-      cd frontend
-      ```
-    - **Install dependencies**:
-      ```bash
-      npm install
-      ```
-    - **Run the frontend server**:
-      ```bash
-      npm start
-      ```
+3. **Run the server**:
+    ```bash
+    cd ecommerce
+    python manage.py runserver
+    ```
 
 ## Configuration
 ### Paytm Integration
